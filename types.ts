@@ -1,3 +1,4 @@
+// FIX: Removed circular import of DeploymentStatus.
 export enum DeploymentStatus {
   QUEUED = 'Em Fila',
   BUILDING = 'Construindo',
@@ -5,13 +6,8 @@ export enum DeploymentStatus {
   ERROR = 'Erro',
 }
 
-export enum ProjectPipelineStatus {
-  ENVIAR_AO_CLIENTE = 'Enviar ao Cliente',
-  AGUARDANDO_DADOS_CLIENTE = 'Aguardando Dados do Cliente',
-  AGUARDANDO_PAGAMENTO = 'Aguardando Pagamento',
-  CLIENTES = 'Clientes',
-  EM_REVISAO = 'Em Revisão',
-  REMARKETING = 'Remarketing',
+export enum ClientStatus {
+  ACTIVE = 'Ativo',
 }
 
 export interface ProjectContact {
@@ -19,21 +15,35 @@ export interface ProjectContact {
   phone?: string;
 }
 
+export interface Lead {
+  id: string;
+  name: string;
+  area: string;
+  dossier?: string;
+  diagnosis?: string;
+}
+
+export interface Client {
+  id: string;
+  name: string;
+  area: string;
+  status: ClientStatus;
+  dossier?: string;
+  diagnosis?: string;
+}
+
 export interface Project {
   id: string;
   name: string;
   subdomain: string;
   deploymentStatus: DeploymentStatus;
-  pipelineStatus: ProjectPipelineStatus;
   lastUpdated: string;
   thumbnailUrl: string;
   tags: string[];
   techStack: string;
   contacts: ProjectContact;
-}
-
-export interface ProjectBlock {
-  id: string;
-  name: string;
-  projects: Project[];
+  dossier?: string;
+  diagnosis?: string;
+  leads: Lead[];
+  clients: Client[];
 }

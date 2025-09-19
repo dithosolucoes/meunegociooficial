@@ -10,6 +10,7 @@
     <script type="importmap">
 {
   "imports": {
+    "@google/genai": "https://esm.run/@google/genai",
     "three": "https://unpkg.com/three@0.158.0/build/three.module.js",
     "three/addons/": "https://unpkg.com/three@0.158.0/examples/jsm/",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
@@ -21,6 +22,22 @@
     <style>
       @import url('https://rsms.me/inter/inter.css');
       html { font-family: 'Inter', sans-serif; }
+      
+      /* Estilos para o bloco de código gerado pela IA */
+      pre {
+        background-color: #0d1117; /* Cor de fundo escura */
+        border: 1px solid #30363d; /* Borda sutil */
+        border-radius: 6px; /* Bordas arredondadas */
+        padding: 16px;
+        overflow-x: auto; /* Rolagem horizontal */
+        color: #c9d1d9; /* Cor do texto */
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      code {
+         font-family: 'Courier New', Courier, monospace;
+      }
     </style>
   </head>
   <body class="bg-black antialiased">

@@ -4,6 +4,8 @@ export interface AnalyzedData {
     tags: string[];
     techStack: string;
     contacts: ProjectContact;
+    dossier?: string;
+    diagnosis?: string;
 }
 
 const KEYWORD_MAP: Record<string, string[]> = {
@@ -28,12 +30,16 @@ export const analyzeSite = async (files: FileList): Promise<AnalyzedData> => {
     let techStack = 'HTML/CSS/JS';
     const tags = new Set<string>();
     const contacts: ProjectContact = {};
+    let dossier: string | undefined = undefined;
+    let diagnosis: string | undefined = undefined;
     
-    // Read file contents into memory (for small projects)
-    const fileContents = await Promise.all(
-        fileArray.filter(f => f.type.startsWith('text/') || f.name.endsWith('.json'))
-                 .map(file => file.text().then(content => ({ name: file.name, content })))
-    );
+    // Read file contents into memory
+    const fileContentsPromises = fileArray.map(async (file) => {
+        const content = await file.text();
+        return { name: file.name, content };
+    });
+    
+    const fileContents = await Promise.all(fileContentsPromises);
 
     // 1. Determine Tech Stack
     for (const file of fileContents) {
@@ -45,14 +51,24 @@ export const analyzeSite = async (files: FileList): Promise<AnalyzedData> => {
                 else if (pkg.dependencies?.['vue']) techStack = 'Vue.js';
                 else if (pkg.dependencies?.['@angular/core']) techStack = 'Angular';
                 else techStack = 'Node.js Project';
-                break; // Found it
+                break;
             } catch (e) { console.error("Could not parse package.json"); }
         }
     }
     tags.add(techStack);
 
-    // 2. Analyze content for keywords and contacts
-    const allTextContent = fileContents.map(f => f.content).join(' ').toLowerCase();
+    // 2. Analyze content for keywords, contacts, dossier, and diagnosis
+    let allTextContent = '';
+    for (const file of fileContents) {
+        // Find dossier and diagnosis files specifically
+        if (file.name.toLowerCase() === 'dossie.txt' || file.name.toLowerCase() === 'dossie.md') {
+            dossier = file.content;
+        } else if (file.name.toLowerCase() === 'diagnostico.txt' || file.name.toLowerCase() === 'diagnostico.md') {
+            diagnosis = file.content;
+        } else {
+             allTextContent += file.content.toLowerCase();
+        }
+    }
 
     // Find tags
     for (const [tag, keywords] of Object.entries(KEYWORD_MAP)) {
@@ -81,6 +97,8 @@ export const analyzeSite = async (files: FileList): Promise<AnalyzedData> => {
                 tags: Array.from(tags),
                 techStack,
                 contacts,
+                dossier,
+                diagnosis,
             });
         }, 500);
     });
