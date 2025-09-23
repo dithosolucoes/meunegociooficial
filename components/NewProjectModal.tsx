@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { UploadIcon } from './icons/UploadIcon';
 import { SpinnerIcon } from './icons/SpinnerIcon';
+import { v4 as uuidv4 } from 'uuid'; // Presumindo que uuid está disponível
 
 interface NewProjectModalProps {
   onClose: () => void;

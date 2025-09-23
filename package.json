@@ -12,7 +12,9 @@
     "@google/genai": "latest",
     "three": "0.158.0",
     "react-dom": "^19.1.1",
-    "react": "^19.1.1"
+    "react": "^19.1.1",
+    "simplex-noise": "^4.0.3",
+    "uuid": "latest"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

@@ -1,15 +1,20 @@
 import React from 'react';
 import { PlusIcon } from './icons/PlusIcon';
+import { MapIcon } from './icons/MapIcon';
+import { BookOpenIcon } from './icons/BookOpenIcon';
+import { ChatBubbleLeftRightIcon } from './icons/ChatBubbleLeftRightIcon';
+import { ShieldCheckIcon } from './icons/ShieldCheckIcon';
+
 
 interface HeaderProps {
   onLogout: () => void;
   onNewProjectClick: () => void;
-  activePage: 'leads' | 'clientes';
-  setActivePage: (page: 'leads' | 'clientes') => void;
+  activePage: 'mapeamento' | 'conceitos' | 'prospeccao' | 'clientes';
+  setActivePage: (page: 'mapeamento' | 'conceitos' | 'prospeccao' | 'clientes') => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ onLogout, onNewProjectClick, activePage, setActivePage }) => {
-  const navItemClasses = "px-3 py-2 rounded-md text-sm font-medium transition-colors";
+  const navItemClasses = "flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors";
   const activeNavItemClasses = "bg-gray-800 text-white";
   const inactiveNavItemClasses = "text-gray-400 hover:bg-gray-700 hover:text-white";
 
@@ -21,16 +26,32 @@ const Header: React.FC<HeaderProps> = ({ onLogout, onNewProjectClick, activePage
             <h1 className="text-xl font-bold text-white">MySite</h1>
             <nav className="hidden md:flex items-baseline space-x-4">
               <button 
-                onClick={() => setActivePage('leads')}
-                className={`${navItemClasses} ${activePage === 'leads' ? activeNavItemClasses : inactiveNavItemClasses}`}
+                onClick={() => setActivePage('mapeamento')}
+                className={`${navItemClasses} ${activePage === 'mapeamento' ? activeNavItemClasses : inactiveNavItemClasses}`}
               >
-                Leads
+                <MapIcon className="w-5 h-5"/>
+                Mapa de Oportunidades
+              </button>
+              <button 
+                onClick={() => setActivePage('prospeccao')}
+                className={`${navItemClasses} ${activePage === 'prospeccao' ? activeNavItemClasses : inactiveNavItemClasses}`}
+              >
+                <ChatBubbleLeftRightIcon className="w-5 h-5"/>
+                Prospecção
               </button>
               <button 
                 onClick={() => setActivePage('clientes')}
                 className={`${navItemClasses} ${activePage === 'clientes' ? activeNavItemClasses : inactiveNavItemClasses}`}
               >
+                <ShieldCheckIcon className="w-5 h-5"/>
                 Clientes
+              </button>
+              <button 
+                onClick={() => setActivePage('conceitos')}
+                className={`${navItemClasses} ${activePage === 'conceitos' ? activeNavItemClasses : inactiveNavItemClasses}`}
+              >
+                <BookOpenIcon />
+                Base de Conhecimento
               </button>
             </nav>
           </div>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MySite - Deployments Instantâneos</title>
+    <title>MySite - Célula de Inteligência Externa</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
     <script type="importmap">
@@ -15,13 +15,24 @@
     "three/addons/": "https://unpkg.com/three@0.158.0/examples/jsm/",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
     "react/": "https://aistudiocdn.com/react@^19.1.1/",
-    "react": "https://aistudiocdn.com/react@^19.1.1"
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "simplex-noise": "https://aistudiocdn.com/simplex-noise@^4.0.3",
+    "uuid": "https://jspm.dev/uuid"
   }
 }
 </script>
     <style>
       @import url('https://rsms.me/inter/inter.css');
-      html { font-family: 'Inter', sans-serif; }
+      @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&display=swap');
+      
+      html { 
+        font-family: 'Inter', sans-serif; 
+        scroll-behavior: smooth;
+      }
+      
+      h1, h2, h3, h4, .font-serif {
+        font-family: 'Source Serif 4', serif;
+      }
       
       /* Estilos para o bloco de código gerado pela IA */
       pre {
@@ -40,7 +51,7 @@
       }
     </style>
   </head>
-  <body class="bg-black antialiased">
+  <body class="bg-[#0B0B0C] antialiased">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>
